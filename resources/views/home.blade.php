@@ -22,7 +22,7 @@
                                     </ul>
                                 </p>
                             <div style="display: flex;  justify-content: right">
-                            <a href="#" class="btn btn-primary" >Order now!</a>
+                            <a href="{{ route('order.index') }}" class="btn btn-primary" >Order now!</a>
                             </div>
                         </div>
                     </div>

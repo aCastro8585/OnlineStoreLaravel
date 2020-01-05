@@ -9,22 +9,21 @@
 {!! Form::open(['route' => 'order.confirm'], ['class' => 'form']) !!}
 
 <div class="form-group " >
+
  {!! Form::label('name', 'Name', ['class' => 'control-label'])!!}
-{!! Form::text('name', null,
+{!! Form::text('name', $user->name,
  [
 'class' => 'form-control input-lg',
- 'placeholder' => 'PHP Hacking and Pizza'
 ])
  !!}
 </div>
 
 <div class="form-group " >
  {!! Form::label('email', 'Email', ['class' => 'control-label'])!!}
-{!! Form::text('email', null,
+{!! Form::text('email', $user->email,
  [
 'class' => 'form-control input-lg',
- 'placeholder' => 'PHP Hacking and Pizza'
-])
+ ])
  !!}
 </div>
 
@@ -34,7 +33,6 @@
 {!! Form::text('phone', null,
  [
 'class' => 'form-control input-lg',
- 'placeholder' => ''
 ])
  !!}
 </div>
