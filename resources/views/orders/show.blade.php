@@ -4,10 +4,10 @@
         <div class="col-md-5">
             <div class="card mb-3 " >
             <div class="row no-gutters">
-                <div class="col-md-4 " style="padding:10px; display: flex;  align-items: center;  justify-content: center">
+                <div class="col-md-6 " style="padding:10px; display: flex;  align-items: center;  justify-content: center">
                 <img src="{{ asset('img/laptop.jpg') }}" class="card-img "  alt="laptop">
                 </div>
-                    <div class="col-md-8" >
+                    <div class="col-md-6" >
                         <div class="card-body " >
                             <h5 class="card-title " style=" text-align: justify; font-size: 25px;">Confirm Order </h5>
                                 <p class="card-text"  > 

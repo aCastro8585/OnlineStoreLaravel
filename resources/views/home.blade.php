@@ -6,10 +6,10 @@
         <div class="col-md-6">
             <div class="card mb-3 " >
             <div class="row no-gutters">
-                <div class="col-md-4 " style="padding:10px; display: flex;  align-items: center;  justify-content: center">
+                <div class="col-md-5 " style="padding:10px; display: flex;  align-items: center;  justify-content: center">
                 <img src="{{ asset('img/laptop.jpg') }}" class="card-img "  alt="laptop">
                 </div>
-                    <div class="col-md-8">
+                    <div class="col-md-7">
                         <div class="card-body " >
                             <h5 class="card-title " style=" text-align: justify;">Acer Aspire 5 Slim Laptop, 15.6" Full HD IPS Display, AMD Ryzen 7 3700U, RX Vega 10 Graphics, 8GB DDR4, 512GB SSD, Backlit Keyboard, Windows 10 Home, A515-43-R6DE </h5>
                                 <p class="card-text"  > 
