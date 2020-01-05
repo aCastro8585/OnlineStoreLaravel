@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-
+use App\Order;
 class OrdersController extends Controller
 {
     /**
@@ -27,11 +27,22 @@ class OrdersController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Confirm the order in a different view.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
+    public function confirm(Request $request)
+    {
+        //
+        $order=new Order;
+        $order->name =  $request->name;
+        $order->email = $request->email;
+        $order->phone = $request->phone;
+        return view('orders.show')->with('order', $order);
+    }
+
+
     public function store(Request $request)
     {
         //
@@ -46,6 +57,7 @@ class OrdersController extends Controller
     public function show($id)
     {
         //
+
     }
 
     /**
