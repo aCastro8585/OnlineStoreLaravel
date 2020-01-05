@@ -12,9 +12,9 @@
                             <h5 class="card-title " style=" text-align: justify; font-size: 25px;">Confirm Order </h5>
                                 <p class="card-text"  > 
                                     <ul style=" text-align: justify; list-style-type: none;">
-                                        <li>{{$order->name}}
-                                        <li>{{$order->phone}}
-                                        <li>{{$order->email}}
+                                        <li>{{$order->customer_name}}
+                                        <li>{{$order->customer_mobile}}
+                                        <li>{{$order->customer_email}}
                                         <li style="color:red; font-size: 20px "> <strong>$943.3434</strong>
                                     </ul>
                                 </p>

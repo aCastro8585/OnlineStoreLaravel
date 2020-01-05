@@ -18,7 +18,7 @@ class CreateOrdersTable extends Migration
             $table->char('customer_name', 80);
             $table->char('customer_email', 120);
             $table->char('customer_mobile', 40);
-            $table->char('status', 20);
+            $table->char('status', 20)->nullable();;
             $table->timestamps();
         });
     }

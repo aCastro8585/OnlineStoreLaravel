@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Auth;
 
 class OrderConfirmRequest extends FormRequest
 {
@@ -13,11 +14,11 @@ class OrderConfirmRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return Auth::check();
     }
 
     /**
-     * Get the validation rules that apply to the request.
+     * Validate name, email and mobile phone of the customer.
      *
      * @return array
      */
@@ -25,9 +26,9 @@ class OrderConfirmRequest extends FormRequest
     {
         return [
             //
-        'name' => 'required|max:80',
-        'email' => 'required|email|min:5|max:120',
-        'phone' => 'required|digits_between:10,40'
+        'customer_name' => 'required|min:5|max:80',
+        'customer_email' => 'required|email|min:5|max:120',
+        'customer_mobile' => 'required|digits_between:10,40'
         ];
     }
 }

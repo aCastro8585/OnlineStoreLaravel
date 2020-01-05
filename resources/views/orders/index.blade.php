@@ -10,8 +10,8 @@
 
 <div class="form-group " >
 
- {!! Form::label('name', 'Name', ['class' => 'control-label'])!!}
-{!! Form::text('name', $user->name,
+ {!! Form::label('customer_name', 'Name', ['class' => 'control-label'])!!}
+{!! Form::text('customer_name', $user->name,
  [
 'class' => 'form-control input-lg',
 ])
@@ -19,8 +19,8 @@
 </div>
 
 <div class="form-group " >
- {!! Form::label('email', 'Email', ['class' => 'control-label'])!!}
-{!! Form::text('email', $user->email,
+ {!! Form::label('customer_email', 'Email', ['class' => 'control-label'])!!}
+{!! Form::text('customer_email', $user->email,
  [
 'class' => 'form-control input-lg',
  ])
@@ -29,8 +29,8 @@
 
 
 <div class="form-group " >
- {!! Form::label('phone', 'Mobile Phone', ['class' => 'control-label'])!!}
-{!! Form::text('phone', null,
+ {!! Form::label('customer_mobile', 'Mobile Phone', ['class' => 'control-label'])!!}
+{!! Form::text('customer_mobile', null,
  [
 'class' => 'form-control input-lg',
 ])

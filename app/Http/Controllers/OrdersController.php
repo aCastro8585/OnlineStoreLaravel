@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Order;
+use App\Http\Requests\OrderConfirmRequest;
 use Illuminate\Support\Facades\Auth;
 class OrdersController extends Controller
 {
@@ -31,17 +32,17 @@ class OrdersController extends Controller
 
     /**
      * Confirm the order in a different view.
-     *
+     * Validate the form with OrderConfirmRequest Class
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function confirm(Request $request)
+    public function confirm(OrderConfirmRequest $request)
     {
         //
         $order=new Order;
-        $order->name =  $request->name;
-        $order->email = $request->email;
-        $order->phone = $request->phone;
+        $order->customer_name =  $request->customer_name;
+        $order->customer_email = $request->customer_email;
+        $order->customer_mobile = $request->customer_mobile; 
         return view('orders.show')->with('order', $order);
     }
 
