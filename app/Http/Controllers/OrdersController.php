@@ -7,13 +7,13 @@ use Illuminate\Http\Request;
 class OrdersController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Display the form to order the item.
      *
      * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return view('orders.index');
     }
 
     /**
