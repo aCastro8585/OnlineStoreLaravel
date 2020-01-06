@@ -26,7 +26,6 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -36,5 +35,13 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    protected function authenticated($request,$user){
+        if($request->user()->is_admin == true){
+            return redirect('/admin/orders'); //redirect to admin panel
+        }
+    
+        return redirect('home'); //redirect to standard user homepage
     }
 }
