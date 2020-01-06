@@ -20,3 +20,7 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 Route::resource('order', 'OrdersController');
 Route::post('order/confirm', 'OrdersController@confirm')->name('order.confirm');
+Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
+{
+Route::resource('orders', 'OrdersController');
+});
