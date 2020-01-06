@@ -1,3 +1,7 @@
+@extends('layouts.app')
+@section('content')
+
+
 <h1>Orders</h1>
 
 <ul>
@@ -11,3 +15,6 @@
 
 @endforelse
 </ul>
+
+
+@endsection
