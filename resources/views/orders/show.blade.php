@@ -19,8 +19,15 @@
                                         <li style="color:red; font-size: 20px "> <strong>$1000</strong>
                                     </ul>
                                 </p>
+                                
                             <div style="display: flex;  justify-content: right">
-                            <a href="#" class="btn btn-primary" >Confirm</a>
+                            {!! Form::open(['route' => 'order.store'], ['class' => 'form']) !!}
+                            {!! Form::hidden('customer_name', $order->customer_name)!!}
+                            {!! Form::hidden('customer_id_type', $order->customer_id_type)!!}
+                            {!! Form::hidden('customer_id', $order->customer_id)!!}
+                            {!! Form::hidden('customer_mobile', $order->customer_mobile)!!}
+                            {!! Form::hidden('customer_email', $order->customer_email)!!}
+                            {!! Form::submit('Confirm!', [ 'class' => 'btn btn-primary', ])!!}
                             </div>
                         </div>
                     </div>

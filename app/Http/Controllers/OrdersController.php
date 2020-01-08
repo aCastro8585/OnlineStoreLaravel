@@ -54,9 +54,24 @@ class OrdersController extends Controller
         $order->customer_id = $request->customer_id; 
         $order->customer_email = $request->customer_email;
         $order->customer_mobile = $request->customer_mobile; 
-        
-        
-       /*    $client = new Client([
+        return view('orders.show')->with('order', $order);
+    }
+
+
+    public function store(Request $request)
+    {
+        $order=new Order;
+        $order->customer_name =  $request->customer_name;
+        $order->customer_id_type = $request->customer_id_type; 
+        $order->customer_id = $request->customer_id; 
+        $order->customer_email = $request->customer_email;
+        $order->customer_mobile = $request->customer_mobile; 
+        $order->status = 'CREATED'; 
+        $order->p2p_url = 'www.google.com'; 
+        $order->request_id = '233223';
+        $order->save(); 
+       // $order->save();
+         /*    $client = new Client([
             // Base URI is used with relative requests
             'base_uri' => 'https://dev.placetopay.com/redirection/',
             // You can set any number of default request options.
@@ -78,13 +93,10 @@ class OrdersController extends Controller
         $url= $json['processUrl']; 
        flash($url)->success();
        return redirect()->away($url); */
-        return view('orders.show')->with('order', $order);
-    }
 
+       flash('Guardado con éxito')->success();
+       return view('orders.show')->with('order', $order);
 
-    public function store(Request $request)
-    {
-        //
     }
 
     /**
