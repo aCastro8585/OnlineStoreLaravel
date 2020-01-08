@@ -16,6 +16,8 @@ class CreateOrdersTable extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->char('customer_name', 80);
+            $table->char('customer_id_type', 5);
+            $table->char('customer_id', 20);
             $table->char('customer_email', 120);
             $table->char('customer_mobile', 40);
             $table->char('status', 20)->nullable();;

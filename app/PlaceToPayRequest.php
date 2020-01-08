@@ -65,16 +65,7 @@ class PlaceToPayRequest {
         $payment['allowPartial'] =false;
         return $payment;
     }
-
-    public static function getReturnData($userData) {
-        $returnData = array();
-        $returnData['expiration'] = '2019-03-06T00:00:00-05:00';
-        $returnData['returnUrl'] = 'http://localhost/projects/OnlineStore/public/order';
-        $returnData['ipAddress'] ='127.0.0.1';
-        $returnData['userAgent'] = 'PlacetoPay Sandbox';
-        return $returnData;
-    }
- 
+   
 }
 
 /* {

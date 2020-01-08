@@ -13,9 +13,10 @@
                                 <p class="card-text"  > 
                                     <ul style=" text-align: justify; list-style-type: none;">
                                         <li>{{$order->customer_name}}
-                                        <li>{{$order->customer_mobile}}
+                                        <li>{{$order->customer_id_type}}. {{$order->customer_id}}
+                                        <li>Mobile: {{$order->customer_mobile}}
                                         <li>{{$order->customer_email}}
-                                        <li style="color:red; font-size: 20px "> <strong>$943.3434</strong>
+                                        <li style="color:red; font-size: 20px "> <strong>$1000</strong>
                                     </ul>
                                 </p>
                             <div style="display: flex;  justify-content: right">

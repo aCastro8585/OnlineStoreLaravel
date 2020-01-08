@@ -50,17 +50,20 @@ class OrdersController extends Controller
         //
         $order=new Order;
         $order->customer_name =  $request->customer_name;
+        $order->customer_id_type = $request->customer_id_type; 
+        $order->customer_id = $request->customer_id; 
         $order->customer_email = $request->customer_email;
         $order->customer_mobile = $request->customer_mobile; 
         
-        $client = new Client([
+        
+       /*    $client = new Client([
             // Base URI is used with relative requests
             'base_uri' => 'https://dev.placetopay.com/redirection/',
             // You can set any number of default request options.
           
         ]);
            
-        $requestBody=PlaceToPayRequest::getRequestBodyContent($order);
+      $requestBody=PlaceToPayRequest::getRequestBodyContent($order);
       //  $response = $client->post('https://dev.placetopay.com/redirection/api/session', array(), $requestBody);
    
         $client = new Client(["base_uri" => "https://dev.placetopay.com/redirection/"]);
@@ -74,8 +77,8 @@ class OrdersController extends Controller
         $json = json_decode($response->getBody(), true);
         $url= $json['processUrl']; 
        flash($url)->success();
-       return redirect()->away($url);
-      //  return view('orders.show')->with('order', $order);
+       return redirect()->away($url); */
+        return view('orders.show')->with('order', $order);
     }
 
 

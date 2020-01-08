@@ -27,6 +27,8 @@ class OrderConfirmRequest extends FormRequest
         return [
             //
         'customer_name' => 'required|min:5|max:80',
+        'customer_id_type' => 'required',
+        'customer_id' => 'required|digits_between:6,10',
         'customer_email' => 'required|email|min:5|max:120',
         'customer_mobile' => 'required|digits_between:10,40'
         ];
