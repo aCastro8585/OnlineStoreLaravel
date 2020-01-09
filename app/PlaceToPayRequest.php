@@ -1,16 +1,19 @@
 <?php
 	
 namespace App;
- 
+ use App\Order;
 class PlaceToPayRequest {
     
     public static function getRequestBodyContent($userData) {
+        date_default_timezone_set("America/Bogota");
         $data = array();
         $data['auth']=self::getAuthData();
         $data['locale']="en_CO";
         $data['buyer']=self::getBuyerData($userData);
         $data['payment']=self::getPaymentData($userData);
-        $data['expiration'] = '2020-02-09T00:00:00-05:00';
+        $date=date_create('c');
+        date_add($date,date_interval_create_from_date_string("2 days"));
+        $data['expiration'] = date_format($date,"c");;
         $data['returnUrl'] = 'http://localhost/projects/OnlineStore/public/home';
         $data['ipAddress'] ='127.0.0.1';
         $data['userAgent'] = 'PlacetoPay Sandbox';
@@ -22,9 +25,7 @@ class PlaceToPayRequest {
     public static function getAuthData() {
         $login='6dd490faf9cb87a9862245da41170ff2';
         $secretKey='024h1IlD';
-
         $seed = date('c');
-
         if (function_exists('random_bytes')) {
             $nonce = bin2hex(random_bytes(16));
         } elseif (function_exists('openssl_random_pseudo_bytes')) {
@@ -46,17 +47,18 @@ class PlaceToPayRequest {
     public static function getBuyerData($userData) {
         $buyer = array();
         $buyer['name'] = $userData->customer_name;
-        $buyer['surname'] = $userData->customer_name;
+        $buyer['surname'] = '';
         $buyer['email'] =$userData->customer_email;
-        $buyer['document'] = '1341453335135';
-        $buyer['documentType'] ='CC';
+        $buyer['document'] = $userData->customer_id;
+        $buyer['documentType'] =$userData->customer_id_type;
         $buyer['mobile'] = $userData->customer_mobile;
         return $buyer;
     }
 
     public static function getPaymentData($userData) {
+        $reference=Order::all()->last()->id;
         $payment = array();
-        $payment['reference'] = '1233345';
+        $payment['reference'] = strval($reference+1);
         $payment['description'] = 'Laptop ACER Aspire 5 Intel i5';
         $amount = array();
         $amount['currency'] ='COP';

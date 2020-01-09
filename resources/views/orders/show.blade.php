@@ -12,21 +12,21 @@
                             <h5 class="card-title " style=" text-align: justify; font-size: 25px;">Confirm Order </h5>
                                 <p class="card-text"  > 
                                     <ul style=" text-align: justify; list-style-type: none;">
-                                        <li>{{$order->customer_name}}
-                                        <li>{{$order->customer_id_type}}. {{$order->customer_id}}
-                                        <li>Mobile: {{$order->customer_mobile}}
-                                        <li>{{$order->customer_email}}
+                                        <li>{{$request->customer_name}}
+                                        <li>{{$request->customer_id_type}}. {{$request->customer_id}}
+                                        <li>Mobile: {{$request->customer_mobile}}
+                                        <li>{{$request->customer_email}}
                                         <li style="color:red; font-size: 20px "> <strong>$1000</strong>
                                     </ul>
                                 </p>
                                 
                             <div style="display: flex;  justify-content: right">
                             {!! Form::open(['route' => 'order.store'], ['class' => 'form']) !!}
-                            {!! Form::hidden('customer_name', $order->customer_name)!!}
-                            {!! Form::hidden('customer_id_type', $order->customer_id_type)!!}
-                            {!! Form::hidden('customer_id', $order->customer_id)!!}
-                            {!! Form::hidden('customer_mobile', $order->customer_mobile)!!}
-                            {!! Form::hidden('customer_email', $order->customer_email)!!}
+                            {!! Form::hidden('customer_name', $request->customer_name)!!}
+                            {!! Form::hidden('customer_id_type', $request->customer_id_type)!!}
+                            {!! Form::hidden('customer_id', $request->customer_id)!!}
+                            {!! Form::hidden('customer_mobile', $request->customer_mobile)!!}
+                            {!! Form::hidden('customer_email', $request->customer_email)!!}
                             {!! Form::submit('Confirm!', [ 'class' => 'btn btn-primary', ])!!}
                             </div>
                         </div>

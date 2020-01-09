@@ -47,14 +47,7 @@ class OrdersController extends Controller
      */
     public function confirm(OrderConfirmRequest $request)
     {
-        //
-        $order=new Order;
-        $order->customer_name =  $request->customer_name;
-        $order->customer_id_type = $request->customer_id_type; 
-        $order->customer_id = $request->customer_id; 
-        $order->customer_email = $request->customer_email;
-        $order->customer_mobile = $request->customer_mobile; 
-        return view('orders.show')->with('order', $order);
+        return view('orders.show')->with('request', $request);
     }
 
 
@@ -67,9 +60,8 @@ class OrdersController extends Controller
         $order->customer_email = $request->customer_email;
         $order->customer_mobile = $request->customer_mobile; 
         $order->status = 'CREATED'; 
-        $order->p2p_url = 'www.google.com'; 
-        $order->request_id = '233223';
-        $order->save(); 
+        $requestBody=PlaceToPayRequest::getRequestBodyContent($order);
+
        // $order->save();
          /*    $client = new Client([
             // Base URI is used with relative requests
@@ -78,7 +70,6 @@ class OrdersController extends Controller
           
         ]);
            
-      $requestBody=PlaceToPayRequest::getRequestBodyContent($order);
       //  $response = $client->post('https://dev.placetopay.com/redirection/api/session', array(), $requestBody);
    
         $client = new Client(["base_uri" => "https://dev.placetopay.com/redirection/"]);
@@ -93,9 +84,11 @@ class OrdersController extends Controller
         $url= $json['processUrl']; 
        flash($url)->success();
        return redirect()->away($url); */
-
-       flash('Guardado con éxito')->success();
-       return view('orders.show')->with('order', $order);
+       $order->p2p_url = 'www.google.com'; 
+       $order->request_id = '233223';
+      // $order->save(); 
+       flash(json_encode($requestBody))->success();
+       return view('home')->with('order', $order);
 
     }
 
