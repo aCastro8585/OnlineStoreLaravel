@@ -62,16 +62,8 @@ class OrdersController extends Controller
         $order->status = 'CREATED'; 
         $requestBody=PlaceToPayRequest::getRequestBodyContent($order);
 
-       // $order->save();
-         /*    $client = new Client([
-            // Base URI is used with relative requests
-            'base_uri' => 'https://dev.placetopay.com/redirection/',
-            // You can set any number of default request options.
-          
-        ]);
-           
-      //  $response = $client->post('https://dev.placetopay.com/redirection/api/session', array(), $requestBody);
-   
+    
+ 
         $client = new Client(["base_uri" => "https://dev.placetopay.com/redirection/"]);
 
         $response = $client->request('POST', 'https://dev.placetopay.com/redirection/api/session', [
@@ -82,13 +74,14 @@ class OrdersController extends Controller
    
         $json = json_decode($response->getBody(), true);
         $url= $json['processUrl']; 
-       flash($url)->success();
-       return redirect()->away($url); */
-       $order->p2p_url = 'www.google.com'; 
-       $order->request_id = '233223';
-      // $order->save(); 
-       flash(json_encode($requestBody))->success();
-       return view('home')->with('order', $order);
+        $requestId= $json['requestId']; 
+      
+        $order->p2p_url = $url; 
+        $order->request_id = $requestId;
+        $order->save(); 
+
+        return redirect()->away($order->p2p_url); 
+     
 
     }
 

@@ -1,7 +1,7 @@
 <?php
 	
 namespace App;
- use App\Order;
+use App\Order;
 class PlaceToPayRequest {
     
     public static function getRequestBodyContent($userData) {
@@ -56,7 +56,7 @@ class PlaceToPayRequest {
     }
 
     public static function getPaymentData($userData) {
-        $reference=Order::all()->last()->id;
+        $reference=(Order::all()->isEmpty()) ? 0:Order::all()->last()->id ; 
         $payment = array();
         $payment['reference'] = strval($reference+1);
         $payment['description'] = 'Laptop ACER Aspire 5 Intel i5';

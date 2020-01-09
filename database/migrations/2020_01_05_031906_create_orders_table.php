@@ -21,7 +21,7 @@ class CreateOrdersTable extends Migration
             $table->char('customer_email', 120);
             $table->char('customer_mobile', 40);
             $table->char('status', 20)->nullable();
-            $table->char('p2p_url', 20)->nullable();
+            $table->string('p2p_url', 255)->nullable();
             $table->char('request_Id', 20)->nullable();
             $table->timestamps();
         });
