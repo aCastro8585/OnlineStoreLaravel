@@ -53,17 +53,7 @@ class OrdersController extends Controller
 
     public function store(Request $request)
     {
-        $order=new Order;
-        $order->customer_name =  $request->customer_name;
-        $order->customer_id_type = $request->customer_id_type; 
-        $order->customer_id = $request->customer_id; 
-        $order->customer_email = $request->customer_email;
-        $order->customer_mobile = $request->customer_mobile; 
-        $order->status = 'CREATED'; 
-        $requestBody=PlaceToPayRequest::getRequestBodyContent($order);
 
-    
- 
         $client = new Client(["base_uri" => "https://dev.placetopay.com/redirection/"]);
 
         $response = $client->request('POST', 'https://dev.placetopay.com/redirection/api/session', [
