@@ -2,7 +2,32 @@
 	
 namespace App;
 use App\Order;
+use GuzzleHttp\Client;
+
 class PlaceToPayRequest {
+    
+    public static function createPaymentRequest ($userData){
+        $requestBody=self::getRequestBodyContent($userData);
+        $client = new Client(["base_uri" => "https://dev.placetopay.com/redirection/"]);
+        $response = $client->request('POST', 'https://dev.placetopay.com/redirection/api/session', [
+            'auth'=>null,
+            'json' => $requestBody
+        ]);
+        $jsonResponse = json_decode($response->getBody(), true);
+        return $jsonResponse;
+    }
+
+    public static function consultPaymentStatus ($requestId){
+        $data = array();
+        $data['auth']=self::getAuthData();
+        $client = new Client(["base_uri" => "https://dev.placetopay.com/redirection/"]);
+        $response = $client->request('POST', 'https://dev.placetopay.com/redirection/api/session'.$requestId, [
+            'auth'=>null,
+            'json' => $data
+        ]);
+        $jsonResponse = json_decode($response->getBody(), true);
+        return $jsonResponse;
+    }
     
     public static function getRequestBodyContent($userData) {
         date_default_timezone_set("America/Bogota");
