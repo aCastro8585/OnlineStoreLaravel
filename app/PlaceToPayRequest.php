@@ -21,7 +21,7 @@ class PlaceToPayRequest {
         $data = array();
         $data['auth']=self::getAuthData();
         $client = new Client(["base_uri" => "https://dev.placetopay.com/redirection/"]);
-        $response = $client->request('POST', 'https://dev.placetopay.com/redirection/api/session'.$requestId, [
+        $response = $client->request('POST', 'https://dev.placetopay.com/redirection/api/session/'.$requestId, [
             'auth'=>null,
             'json' => $data
         ]);

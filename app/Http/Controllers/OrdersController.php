@@ -7,7 +7,7 @@ use App\Order;
 use App\PlaceToPayRequest;
 use App\Http\Requests\OrderConfirmRequest;
 use Illuminate\Support\Facades\Auth;
-use GuzzleHttp\Client;
+use Illuminate\Support\Facades\DB;
 class OrdersController extends Controller
 {
     /**
@@ -74,7 +74,21 @@ class OrdersController extends Controller
      
     }
 
-    public function showTransactionState(){
+    public function consult(){
+        $user = Auth::user();
+        $requestId=$user->order->request_id;
+        $response=PlaceToPayRequest::consultPaymentStatus($requestId);
+        $status= $response['status']['status']; 
+        if ($status=="APPROVED")
+        {
+            $status="PAYED";
+        } else
+        {
+            $status="REJECTED";
+        }
+        DB::table('orders')->where('request_id', $requestId)->update(['status' => $status]);
+        flash($response['request']['fields'][0]['value'])->success();       
+        return view('orders.consult')->with('response', $response);
 
     }
 
@@ -85,10 +99,9 @@ class OrdersController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show()
     {
         //
-
     }
 
     /**

@@ -18,6 +18,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+Route::get('order/consult', 'OrdersController@consult')->name('order.consult');
 Route::resource('order', 'OrdersController');
 Route::post('order/confirm', 'OrdersController@confirm')->name('order.confirm');
 Route::group(['prefix' => 'admin', 'namespace' => 'Admin'], function()
