@@ -26,6 +26,7 @@ class OrdersController extends Controller
     
     {
         $user = Auth::user();
+        $user->order()->delete();
         return view('orders.index')->with('user',$user);
     }
 
@@ -52,8 +53,9 @@ class OrdersController extends Controller
 
 
     public function store(Request $request)
-    {
+    { 
         $user = Auth::user();
+        $user->order()->delete();
         $order=new Order;
         $order->customer_name=$request->customer_name;
         $order->customer_id_type=$request->customer_id_type;

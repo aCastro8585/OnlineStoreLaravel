@@ -39,7 +39,7 @@ class PlaceToPayRequest {
         $date=date_create('c');
         date_add($date,date_interval_create_from_date_string("2 days"));
         $data['expiration'] = date_format($date,"c");;
-        $data['returnUrl'] = 'http://localhost/projects/OnlineStore/public/home';
+        $data['returnUrl'] = 'http://localhost/projects/OnlineStore/public/order/consult';
         $data['ipAddress'] ='127.0.0.1';
         $data['userAgent'] = 'PlacetoPay Sandbox';
         return $data;

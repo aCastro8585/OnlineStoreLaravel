@@ -62,7 +62,7 @@
             Bank:
             </div>
             <div class="col-md-4">
-            {{$response['payment'][0]['issuerName']}}
+            {{"Uknown"}}
             </div>
         </div>
         <div class="row justify-content-center">
@@ -81,16 +81,17 @@
             {{$response['payment'][0]['status']['date']}}
             </div>
         </div>
+        </br>
         @if ($response['status']['status']== 'APPROVED')
-        <a href="#" class="btn btn-primary">Buy Again!</a>
+        <a href="{{ route('order.index') }}"  class="btn btn-primary">Buy Again!</a>
         @elseif ($response['status']['status']== 'PENDING')
-        <a href="#" class="btn btn-primary"> Pendiente</a>
+        <a href=" {{$response['request']['fields'][0]['value']}}" class="btn btn-primary"> Complete Payment!</a>
         @elseif ($response['status']['status']== 'REJECTED')
-        <a href="#" class="btn btn-primary">Rechazo </a>
+        <a href="{{ route('order.index') }}" class="btn btn-primary">Try Again! </a>
         @endif
     </div>
     <div class="card-footer text-muted">
-        2 days ago
+        Online Store
     </div>
     </div>
   </div>

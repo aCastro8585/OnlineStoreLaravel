@@ -38,10 +38,16 @@ class LoginController extends Controller
     }
 
     protected function authenticated($request,$user){
-        if($request->user()->is_admin == true){
+        $user=$request->user();
+        if($user->is_admin == true){
             return redirect('/admin/orders'); //redirect to admin panel
-        }
-    
-        return redirect('home'); //redirect to standard user homepage
+        }else{                                //redirect to standard user homepage
+            if(is_object($user->order)){
+                return redirect('/order/consult');
+            }else{
+                return redirect('home');
+            }
+        }  
+        
     }
 }
