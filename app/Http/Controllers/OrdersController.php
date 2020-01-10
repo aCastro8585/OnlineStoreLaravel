@@ -65,33 +65,41 @@ class OrdersController extends Controller
         $order->status='CREATED';
 
         $response=PlaceToPayRequest::createPaymentRequest($order);
-        $url= $response['processUrl']; 
-        $requestId= $response['requestId']; 
-      
-        $order->p2p_url = $url; 
-        $order->request_id = $requestId;
-        $user->order()->save($order); 
+        if (!is_string($response)){
+            $url= $response['processUrl']; 
+            $requestId= $response['requestId']; 
+            $order->p2p_url = $url; 
+            $order->request_id = $requestId;
+            $user->order()->save($order); 
+            return redirect()->away($order->p2p_url); 
+        }else{
+            flash("HTTP REQUEST ERROR: ".$response)->error();
+            return view('orders.show')->with('request', $request);
 
-        return redirect()->away($order->p2p_url); 
-     
+        }
     }
 
     public function consult(){
         $user = Auth::user();
         $requestId=$user->order->request_id;
         $response=PlaceToPayRequest::consultPaymentStatus($requestId);
-        $status= $response['status']['status']; 
-        if ($status=="APPROVED")
-        {
-            $status="PAYED";
-        } else
-        {
-            $status="REJECTED";
-        }
-        DB::table('orders')->where('request_id', $requestId)->update(['status' => $status]);
-        flash($response['request']['fields'][0]['value'])->success();       
-        return view('orders.consult')->with('response', $response);
 
+        if (!is_string($response)){
+                $status= $response['status']['status']; 
+                    if ($status=="APPROVED")
+                    {
+                        $status="PAYED";
+                    } else
+                    {
+                        $status="REJECTED";
+                    }
+                DB::table('orders')->where('request_id', $requestId)->update(['status' => $status]);
+                return view('orders.consult')->with('response', $response);
+          }else {
+                flash("HTTP REQUEST ERROR: ".$response)->error();
+                $response="Error en la petición";
+                return view('orders.consult')->with('response', $response);
+          }
     }
 
 

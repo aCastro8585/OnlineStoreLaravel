@@ -8,24 +8,33 @@ class PlaceToPayRequest {
     
     public static function createPaymentRequest ($userData){
         $requestBody=self::getRequestBodyContent($userData);
+        try{
         $client = new Client(["base_uri" => "https://dev.placetopay.com/redirection/"]);
         $response = $client->request('POST', 'https://dev.placetopay.com/redirection/api/session', [
             'auth'=>null,
             'json' => $requestBody
         ]);
         $jsonResponse = json_decode($response->getBody(), true);
+       
+        }catch (\GuzzleHttp\Exception\ClientException $e) {
+            $jsonResponse = $e->getResponse()->getBody()->getContents();
+        }
         return $jsonResponse;
     }
 
     public static function consultPaymentStatus ($requestId){
         $data = array();
         $data['auth']=self::getAuthData();
-        $client = new Client(["base_uri" => "https://dev.placetopay.com/redirection/"]);
-        $response = $client->request('POST', 'https://dev.placetopay.com/redirection/api/session/'.$requestId, [
-            'auth'=>null,
-            'json' => $data
-        ]);
-        $jsonResponse = json_decode($response->getBody(), true);
+        try{
+            $client = new Client(["base_uri" => "https://dev.placetopay.com/redirection/"]);
+            $response = $client->request('POST', 'https://dev.placetopay.com/redirection/api/session/'.$requestId, [
+                'auth'=>null,
+                'json' => $data
+            ]);
+            $jsonResponse = json_decode($response->getBody(), true);
+          }catch (\GuzzleHttp\Exception\ClientException $e) {
+            $jsonResponse = $e->getResponse()->getBody()->getContents();
+         }
         return $jsonResponse;
     }
     
@@ -95,35 +104,3 @@ class PlaceToPayRequest {
    
 }
 
-/* {
-    "auth": {
-      "login": "usuarioprueba",
-      "tranKey": "jsHJzM3+XG754wXh+aBvi70D9/4=",
-      "nonce": "TTJSa05UVmtNR000TlRrM1pqQTRNV1EREprWkRVMU9EZz0=",
-      "seed": "2019-04-25T18:17:23-04:00"
-    },
-      "locale": "en_CO",
-      "buyer": {
-        "name": "Deion",
-        "surname": "Ondricka",
-        "email": "dnetix@yopmail.com",
-        "document": "1040035000",
-        "documentType": "CC",
-        "mobile": 3006108300
-    },
-  
-      "payment": {
-          "reference": "3210",
-          "description": "Pago básico de prueba 04032019",
-          "amount": {
-              "currency": "COP",
-              "total": "10000"
-          },
-        "allowPartial":false
-        },
-  
-      "expiration": "2019-03-05T00:00:00-05:00",
-      "returnUrl": "https://mysite.com/response/3210",
-      "ipAddress": "127.0.0.1",
-      "userAgent": "PlacetoPay Sandbox"
-  } */

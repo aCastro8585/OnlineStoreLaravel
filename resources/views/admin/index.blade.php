@@ -26,7 +26,7 @@
     </tr>
     @empty
     <tr>
-<p>No registered users</p>
+<p>No registered orders</p>
 </tr>
 @endforelse
   </tbody>
