@@ -2,9 +2,9 @@ TIENDA ONLINE
 PASARELA DE PAGO: PLACE TO PAY
 LARAVEL
 
-Modelos:
-    User
-    Order
+Modelos:</br>
+    User</br>
+    Order</br>
 
 Autenticación:
     La aplicación hace uso de las vistas y controladores provistas por defecto por Laravel.
