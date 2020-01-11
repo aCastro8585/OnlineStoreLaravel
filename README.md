@@ -1,78 +1,55 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+TIENDA ONLINE 
+PASARELA DE PAGO: PLACE TO PAY
+LARAVEL
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Modelos:</br>
+    User</br>
+    Order</br>
 
-## About Laravel
+Autenticación:</br>
+    La aplicación hace uso de las vistas y controladores provistas por defecto por Laravel.</br>
+    Se establecen dos roles: Usuario y Administrador, se utiliza la columna is_admin para ello.</br>
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+Vistas</br>
+    Home: Proporciona información sobre el item a comprar.</br>
+    Order/index: Formulario para solicitar orden.</br>
+    Order/show: Vista para confirmar datos suministrados y ordenar compra.</br>
+    Order/consult: Vista para para consultar estado de la transacción después de realizar dicha transacción.</br>
+    Admin/index: Vista que despliega las ordenes solicitadas para el administrador.</br>
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Controladores</br>
+    Admin/OrdersController: Gestiona rutas asociadas al administrador.</br>
+    OrdersController: Gestiona rutas asociados al usuario.</br>
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Requests</br>
+    OrderConfirmRequest: Clase que extiende de FormRequest y que establece reglas para validar el formulario de solicitud.</br>
+    de orden.</br>
+    
+Mail</br>
+    OrderStatusMail: Se configura la app para hacer uso del servicio MailGun a través de la clase OrderStatusMail</br>
+                     Se puede hacer uso de este servicio para recuperar contraseña olvidada y para informar al usuario sobre </br>el estado de su transacción. Se puede configurar las credenciales de MailGun especificas en el env file para probar el servicio.
+ 
+Flujo de la aplicación</br>
+    Si el administrador se logea se le redirecciona a la vista que presenta las órdenes almacenadas.</br>
+    Si es usuario se le presenta la página de descripción del producto, seguidamente introduce los datos en el formulario,</br>
+    confirma los datos sumistrados y se le redirecciona a la pasarela de pago, al devolver, la aplicación presenta información.</br>
+    Si el usuario se logea después de solicitar una orden se le redirecciona a la vista que proporciona información sobre el</br>
+    estado de su transacción.
+    Según el estado de la transacción el usuario puede repetir el pedido.</br>
+    
+Instrucciones para la instalación de la aplicación:</br>
+1- Clonar el repositorio en una carpeta llamada "OnlineStore"</br>
+2- ejecutar cd OnlineStore</br>
+3- ejecutar composer install</br>
+4- ejecutar npm install</br>
+5- crear base de datos llamada OnlineStore, la conexión con la base de datos mysql se establece en el puerto 3306, username es root, sin password. Se incluye env file con estas configuraciones, se puede cambiar si se desea.</br>
+6- ejecutar php artisan migrate</br>
+7- ejecutar php artisan db:seed --class=UsersTableSeeder</br>
 
-## Learning Laravel
+El seeder almacenará dos usuarios:</br>
+    Usuario normal: juan@gmail.com     contraseña: colombia</br>
+    Usuario Admin:  admin@gmail.com    contraseña: admin</br>
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
-
-## Laravel Sponsors
-
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
-
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
-
-## Contributing
-
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+                     
+    
