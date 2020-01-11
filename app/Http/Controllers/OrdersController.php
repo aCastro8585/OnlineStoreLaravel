@@ -25,8 +25,7 @@ class OrdersController extends Controller
 
 
     public function index()
-    
-    {
+      {
         $user = Auth::user();
         return view('orders.index')->with('user',$user);
     }
