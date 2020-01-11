@@ -48,7 +48,7 @@ Instrucciones para la instalación de la aplicación:</br>
 7- ejecutar php artisan db:seed --class=UsersTableSeeder</br>
 
 El seeder almacenará dos usuarios:</br>
-    Usuario normal: juan@gmail.com     contraseña: Colombia</br>
+    Usuario normal: juan@gmail.com     contraseña: colombia</br>
     Usuario Admin:  admin@gmail.com    contraseña: admin</br>
 
 
