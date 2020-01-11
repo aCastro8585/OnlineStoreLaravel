@@ -90,8 +90,6 @@
                 @else
                 
                 @endif
-        
-        
         </br>
             @if ($response['status']['status']== 'APPROVED')
             <a href="{{ route('order.index') }}"  class="btn btn-primary">Buy Again!</a>

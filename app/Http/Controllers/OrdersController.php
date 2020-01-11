@@ -74,7 +74,7 @@ class OrdersController extends Controller
             $user->order()->save($order); 
             return redirect()->away($order->p2p_url); 
         }else{
-            flash("HTTP REQUEST ERROR: ".$response)->error();
+            flash("ERROR: ".$response)->error();
             return view('orders.show')->with('request', $request);
 
         }
@@ -92,8 +92,7 @@ class OrdersController extends Controller
               }catch(\Swift_TransportException $e){
                  $e->getMessage() ;
               }
-                
-                    if ($status=="APPROVED")
+                 if ($status=="APPROVED")
                     {
                         $status="PAYED";
                     } else
@@ -103,7 +102,7 @@ class OrdersController extends Controller
                 DB::table('orders')->where('request_id', $requestId)->update(['status' => $status]);
                 return view('orders.consult')->with('response', $response);
           }else {
-                flash("HTTP REQUEST ERROR: ".$response)->error();
+                flash("ERROR: ".$response)->error();
                 $response="Error en la petición";
                 return view('orders.consult')->with('response', $response);
           }

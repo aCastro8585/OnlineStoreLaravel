@@ -18,7 +18,9 @@ class PlaceToPayRequest {
        
         }catch (\GuzzleHttp\Exception\ClientException $e) {
             $jsonResponse = $e->getResponse()->getBody()->getContents();
-        }
+        }catch (\GuzzleHttp\Exception\RequestException $e) {
+            $jsonResponse = $e->getMessage();
+           }
         return $jsonResponse;
     }
 
@@ -32,9 +34,11 @@ class PlaceToPayRequest {
                 'json' => $data
             ]);
             $jsonResponse = json_decode($response->getBody(), true);
-          }catch (\GuzzleHttp\Exception\ClientException $e) {
+       }catch (\GuzzleHttp\Exception\ClientException $e) {
             $jsonResponse = $e->getResponse()->getBody()->getContents();
-         }
+         }catch (\GuzzleHttp\Exception\RequestException $e) {
+            $jsonResponse = $e->getMessage();
+           }
         return $jsonResponse;
     }
     
