@@ -27,7 +27,7 @@ Requests</br>
     
 Mail</br>
     OrderStatusMail: Se configura la app para hacer uso del servicio MailGun a través de la clase OrderStatusMail</br>
-                     Se puede hacer uso de este servicio para recuperar contraseña olvidada y para informar al usuario sobre </br>el estado de su transacción.
+                     Se puede hacer uso de este servicio para recuperar contraseña olvidada y para informar al usuario sobre </br>el estado de su transacción. Se puede configurar las credenciales de MailGun especificas en el env file para probar el servicio.
  
 Flujo de la aplicación</br>
     Si el administrador se logea se le redirecciona a la vista que presenta las órdenes almacenadas.</br>
