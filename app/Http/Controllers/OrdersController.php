@@ -8,6 +8,8 @@ use App\PlaceToPayRequest;
 use App\Http\Requests\OrderConfirmRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use App\Mail\OrderStatusMail;
+use Illuminate\Support\Facades\Mail;
 class OrdersController extends Controller
 {
     /**
@@ -26,7 +28,6 @@ class OrdersController extends Controller
     
     {
         $user = Auth::user();
-        $user->order()->delete();
         return view('orders.index')->with('user',$user);
     }
 
@@ -86,6 +87,12 @@ class OrdersController extends Controller
 
         if (!is_string($response)){
                 $status= $response['status']['status']; 
+               try{
+                Mail::to($response['request']['buyer']['email'])->send(new OrderStatusMail($response));
+              }catch(\Swift_TransportException $e){
+                 $e->getMessage() ;
+              }
+                
                     if ($status=="APPROVED")
                     {
                         $status="PAYED";
